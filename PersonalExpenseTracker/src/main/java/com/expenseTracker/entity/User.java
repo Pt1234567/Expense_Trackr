@@ -44,4 +44,10 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<PaymentMethods> paymentMethodsList=new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<Expense> expenseList=new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<RecurringExpense> recurringExpenseList=new ArrayList<>();
+
 }

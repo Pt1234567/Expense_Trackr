@@ -6,30 +6,31 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentMethods {
+public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(unique = true)
-    private String type;
-    private String details;
-
-    private LocalDateTime createdAt;
+    private int amount;
+    private String description;
+    private LocalDate createdAt;
+    private LocalDate updatedAt;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(mappedBy = "paymentMethods",cascade = CascadeType.ALL)
-    private Expense expense;
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "payments_method_id",referencedColumnName = "id")
+    private PaymentMethods paymentMethods;
 
 }
